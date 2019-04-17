@@ -39,10 +39,15 @@
 //    LLXShareDefineDataType  = 0,
 //    LLXShareDefineRequestType = 1,
 //    LLXShareDefineBusinessType = 2,
-    NSArray<LLXShareConfigMessage *> *dataConfigMessage= [configCenter shareConfigMessages:LLXShareDefineDataType];
+    NSArray<LLXShareConfigMessage *> *dataConfigMessages= [configCenter shareConfigMessages:LLXShareDefineDataType];
+    for(LLXShareConfigMessage *dataConfigMessage in dataConfigMessages) {
+        
+        
+    }
     
+    NSArray<LLXShareConfigMessage *> *requestConfigMessage= [configCenter shareConfigMessages:LLXShareDefineRequestType];
     
-    
+    NSArray<LLXShareConfigMessage *> *businessConfigMessage= [configCenter shareConfigMessages:LLXShareDefineBusinessType];
     
     return ret;
 }
