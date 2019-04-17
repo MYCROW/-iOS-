@@ -24,6 +24,7 @@
 - (void)updateConfig
 {
     self.shareConfigMessages = [[NSMutableArray alloc]initWithCapacity:0];
+//    postNotification
 }
 
 - (NSArray<LLXShareConfigMessage *> *)shareConfigMessages:(LLXShareCondifMessageType)configMessageType
@@ -41,36 +42,18 @@
 {
     NSString *configFileFullPath = [kLLXShareConfigFilePath stringByAppendingPathComponent:self.configName];
     if (NO == [FLFileManagerHelp checkFileInFullPath:configFileFullPath]) {
-        //[self c]
         return;
     }
-    
+    //改成遍历枚举？
+    LLXShareConfigMessage *shareConfigMessage = [[LLXShareConfigMessage alloc]initWithType:LLXShareDefineDataType];
+    shareConfigMessage.configFileFullPath = configFileFullPath;
+    [self.shareConfigMessages addObject:shareConfigMessage];
+    shareConfigMessage = [[LLXShareConfigMessage alloc]initWithType:LLXShareDefineRequestType];
+    shareConfigMessage.configFileFullPath = configFileFullPath;
+    [self.shareConfigMessages addObject:shareConfigMessage];
+    shareConfigMessage = [[LLXShareConfigMessage alloc]initWithType:LLXShareDefineBusinessType];
+    shareConfigMessage.configFileFullPath = configFileFullPath;
+    [self.shareConfigMessages addObject:shareConfigMessage];
 }
 
-@end
-
-@implementation LLXCategoryHelper
-+ (NSArray *)categoryArray
-{
-    if ([FLFileManagerHelp checkFileInFullPath:KLLCategoryNewModuleKeyCachePath]) {
-        return [NSKeyedUnarchiver unarchiveObjectWithFile:KLLCategoryNewModuleKeyCachePath];
-    }
-    return nil;
-}
-+ (void)deleteCategoryArrayCache
-{
-    if ([FLFileManagerHelp checkFileInFullPath:KLLCategoryNewModuleKeyCachePath]) {
-        BOOL ret = [FLFileManagerHelp deleteFileInFullPath:KLLCategoryNewModuleKeyCachePath];
-        if (!ret) {
-            NSLog(@"*** delete category Module data failed ***");
-        }
-    }
-}
-+ (void)cacheCategoryArray:(NSArray *)categoryArray {
-    
-    BOOL ret = [NSKeyedArchiver archiveRootObject:categoryArray toFile:KLLCategoryNewModuleKeyCachePath];
-    if (!ret) {
-        NSLog(@"*** save category Module data failed ***");
-    }
-}
 @end

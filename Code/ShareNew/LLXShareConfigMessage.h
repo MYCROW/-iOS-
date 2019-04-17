@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, LLXShareMapType) {
 
 @property(nonatomic,assign)LLXShareCondifMessageType type;
 @property(nonatomic,strong)NSMutableArray<LLXShareConfigGroup *> *configMessage;
+@property(nonatomic,strong)NSString *configFileFullPath;
 
 - (instancetype)initWithType:(LLXShareCondifMessageType)type;
 
@@ -39,6 +40,7 @@ typedef NS_ENUM(NSUInteger, LLXShareMapType) {
 @property(nonatomic,strong)NSString *mapClassName;
 @property(nonatomic,strong)NSMutableArray<LLXShareConfigGroupCell *> *configGroup;
 
+- (instancetype)initWithConfigString:(NSString *)oneSegmentString;
 @end
 
 @interface LLXShareConfigGroupCell : NSObject //定义一条映射关系
